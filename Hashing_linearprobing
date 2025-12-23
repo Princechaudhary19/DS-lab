@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+#define MAX 20
+
+int ht[MAX];
+int m;
+
+// Initialize hash table
+void init() {
+    for (int i = 0; i < m; i++)
+        ht[i] = -1;
+}
+
+// Insert key using linear probing
+void insert(int key) {
+    int index = key % m;
+
+    // Linear probing on collision
+    while (ht[index] != -1) {
+        index = (index + 1) % m;
+    }
+    ht[index] = key;
+}
+
+// Display hash table
+void display() {
+    printf("\nHash Table:\n");
+    for (int i = 0; i < m; i++) {
+        if (ht[i] != -1)
+            printf("HT[%d] --> %d\n", i, ht[i]);
+        else
+            printf("HT[%d] --> EMPTY\n", i);
+    }
+}
+
+// Main function
+int main() {
+    int n, key;
+
+    printf("Enter size of hash table (m): ");
+    scanf("%d", &m);
+
+    init();
+
+    printf("Enter number of employee records (N): ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter 4-digit key: ");
+        scanf("%d", &key);
+        insert(key);
+    }
+
+    display();
+    return 0;
+}
+
+OUTPUT:-
+Enter size of hash table (m): 10
+Enter number of employee records (N): 5
+Enter 4-digit key: 1234
+Enter 4-digit key: 2345
+Enter 4-digit key: 3456
+Enter 4-digit key: 4567
+Enter 4-digit key: 5678
+Hash Table:
+HT[0] --> EMPTY
+HT[1] --> 4567
+HT[2] --> EMPTY
+HT[3] --> EMPTY
+HT[4] --> 1234
+HT[5] --> 2345
+HT[6] --> 3456
+HT[7] --> 5678
+HT[8] --> EMPTY
+HT[9] --> EMPTY
+
